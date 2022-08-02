@@ -1,0 +1,73 @@
+:root {
+    --COLOR1: #CCC;
+    --COLOR2: #CCC;
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+button:hover{
+    cursor: pointer;
+}
+#btn-main {
+    /* background-color: #1652f0; */
+    /* background-color: #cf0e0e; */
+    border: none;
+    border-radius: 8px;
+    color: #ffffff;
+    padding: 12px 32px;
+    font-size: 24px;
+}
+#btn-main:active {
+    background-color: #0039d7;
+    /* border-color: #0039d7; */
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #dae2f8;
+}
+#logContainer {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    height: 400px;
+    width: 200px;
+    background-color: white;
+    margin: 10px;
+    border-radius: 8px;
+    font-size: 20px;
+    overflow: auto;
+}
+.log1 {
+    color: var(--COLOR1);
+}
+.log2 {
+    color: var(--COLOR2);
+}
+h1 {
+    text-align: center;
+    margin: 0;
+    padding: 10px;
+    color:rgb(252, 217, 136);
+    background-color:rgb(99, 41, 0)
+}
+#currentSide {
+    font-size: 20px;
+}
+#average {
+    font-size: 24px;
+    display: flex;
+    flex-direction: row;
+}
+#avgSide1, #avgSide2 {
+    margin: 10px 10px;
+    padding: 5px 30px;
+    border: 2px solid;
+    border-radius: 8px;
+}
