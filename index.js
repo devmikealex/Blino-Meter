@@ -23,14 +23,20 @@ btnTest.addEventListener("click", btnTestFunc);
 const logContainer = document.getElementById("logContainer");
 const blinCount = document.getElementById("blinCount");
 
+const btnInc = document.getElementById("btn-inc")
+btnInc.addEventListener("click", btnIncFunc);
+const btnDec = document.getElementById("btn-dec")
+btnDec.addEventListener("click", btnDecFunc);
+const btnUndo = document.getElementById("btn-undo")
+btnUndo.addEventListener("click", btnUndoFunc);
+
 let startTime;
 let timerId;
 let totalBlinCount=0
 
-// let temp = 0;
-
 function btnMainFunc() {
     console.log(btnMain.textContent);
+    // TODO упростить условие
     if (btnMain.textContent === "START" || btnMain.textContent === "PAUSE") {
         btnMain.textContent = "00 : 00";
         startTime = new Date();
@@ -72,7 +78,6 @@ function timer() {
 }
 
 function log(time, logColor) {
-    // temp++;
     const e = document.createElement("div");
     e.classList = logColor;
     // e.style.color = logColor
@@ -108,6 +113,32 @@ function secToText(seconds) {
 function textToSec(text) {
     const time = text.split(' : ')
     return time[0]*60 + Number(time[1]);
+}
+
+function btnIncFunc(e) {
+    console.log(e.target)
+    const first = logContainer.firstChild
+    const sec = +textToSec(first.textContent)+10
+    first.textContent=secToText(sec)
+    avgSide1.textContent = getAvertage('.log1')
+    avgSide2.textContent = getAvertage('.log2')
+    // TODO пересчитать среднее
+}
+function btnDecFunc() {
+    const first = logContainer.firstChild
+    const sec = +textToSec(first.textContent)-10
+    first.textContent=secToText(sec)
+    avgSide1.textContent = getAvertage('.log1')
+    avgSide2.textContent = getAvertage('.log2')
+    // TODO пересчитать среднее
+    // TODO проверить на меньше 0
+}
+function btnUndoFunc() {
+    const first = logContainer.firstChild
+    first.remove()
+    avgSide1.textContent = getAvertage('.log1')
+    avgSide2.textContent = getAvertage('.log2')
+    // TODO пересчитать среднее
 }
 
 function btnTestFunc() {

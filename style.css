@@ -19,10 +19,7 @@ button:hover{
     padding: 12px 32px;
     font-size: 24px;
 }
-#btn-main:active {
-    background-color: #0039d7;
-    /* border-color: #0039d7; */
-}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -60,14 +57,38 @@ h1 {
 #currentSide {
     font-size: 20px;
 }
+
 #average {
     font-size: 24px;
     display: flex;
     flex-direction: row;
 }
+.temp {
+    display: flex;
+    flex-direction: row;
+}
+
 #avgSide1, #avgSide2 {
     margin: 10px 10px;
     padding: 5px 30px;
     border: 2px solid;
     border-radius: 8px;
+}
+
+
+div.temp button {
+    background-color: rgb(150, 67, 7);
+    border: none;
+    border-radius: 8px;
+    color: #ffffff;
+    padding: 8px 20px;
+    margin: 10px 6px;
+    font-size: 20px;
+}
+
+div.temp button:hover {
+    background-color: rgb(123, 53, 3);
+}
+div.temp button:active {
+    background-color: #160000;
 }
