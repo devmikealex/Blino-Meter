@@ -1,15 +1,16 @@
 const COLOR1 = "#1652f0";
 const COLOR2 = "rgb(252,10,79)";
 
-const alertSound = new Audio("Beep_Computer_04.mp3");
-alertSound.preload = "auto";
+const avgSound = new Audio("Beep_Computer_04.mp3");
+// alertSound.preload = "auto";
+const lastSound = new Audio("001.wav");
 
 document.documentElement.style.setProperty("--COLOR1", COLOR1);
 document.documentElement.style.setProperty("--COLOR2", COLOR2);
 
 const btnMain = document.getElementById("btn-main");
 btnMain.addEventListener("click", btnMainFunc);
-btnMain.style.backgroundColor = COLOR1;
+// btnMain.style.backgroundColor = COLOR1;
 
 const currentSide = document.getElementById("currentSide");
 currentSide.textContent = "Side 1";
@@ -39,14 +40,21 @@ let startTime;
 let timerId;
 let totalBlinCount = 0;
 let signalDelay;
+let firstRun=true
+let lastSecAlert;
 
 function btnMainFunc() {
-    console.log(btnMain.textContent);
     if (!btnMain.textContent.includes(":")) {
+        if(firstRun){
+            firstRun=false
+            btnMain.classList.remove('gradient')
+            // blinCount.textContent = "-"
+            btnMain.style.backgroundColor = COLOR1;
+        }
         btnMain.textContent = "00 : 00";
-        btnMain.classList.remove('gradient')
         startTime = new Date();
         signalDelay = 0;
+        lastSecAlert = true
         timerId = setInterval(timer, 1000);
     } else {
         clearInterval(timerId);
@@ -54,7 +62,6 @@ function btnMainFunc() {
         let avgTarget;
         if (currentSide.textContent === "Side 1") {
             logColor = "log1";
-            // logColor = COLOR1
             currentSide.textContent = "Side 2";
             btnMain.style.backgroundColor = COLOR2;
             currentSide.style.color = COLOR2;
@@ -63,7 +70,6 @@ function btnMainFunc() {
             blinCount.textContent = "Total: " + totalBlinCount;
         } else {
             logColor = "log2";
-            // logColor = COLOR2
             currentSide.textContent = "Side 1";
             btnMain.style.backgroundColor = COLOR1;
             currentSide.style.color = COLOR1;
@@ -78,32 +84,34 @@ function btnMainFunc() {
 function timer() {
     const newTime = new Date();
     const sec = Math.floor((newTime.getTime() - startTime.getTime()) / 1000);
-    // const min = Math.floor(a / 60);
-    // const sec = a % 60;
-    // btnMain.textContent = `${min.pad(2)} : ${sec.pad(2)}`;
     btnMain.textContent = secToText(sec);
-
-    let avgSec;
+    let avgSec
+    let secondLastSec
     if (currentSide.textContent === "Side 1") {
         avgSec = textToSec(avgSide1.textContent);
+        secondLastSec = logContainer.getElementsByClassName('log1')[0]
     } else {
         avgSec = textToSec(avgSide2.textContent);
+        secondLastSec = logContainer.getElementsByClassName('log2')[0]
     }
-    // if (avgSec && sec >= avgSec && !(sec%5)) {
     if (avgSec && sec >= avgSec) {
         if (!(signalDelay % 5)) {
-            Signal(alertSound);
+            Signal(avgSound);
         }
         signalDelay++;
     }
+    
+    const lastSec = +textToSec(secondLastSec.textContent) 
+    if (lastSecAlert && lastSec && sec >= lastSec) {
+        Signal(lastSound);
+        lastSecAlert = false
+    }  
 }
 
 function log(time, logColor) {
     const e = document.createElement("div");
     e.classList = logColor;
-    // e.style.color = logColor
     e.textContent = time;
-    // logContainer.insertBefore(e, logContainer.firstChild)
     logContainer.prepend(e);
 }
 
@@ -119,14 +127,12 @@ function getAvertage(className) {
     }
     let allTimeSum = 0;
     list.forEach((el) => {
-        // const time = el.textContent.split(' : ')
         allTimeSum += textToSec(el.textContent);
     });
     return secToText(Math.trunc(allTimeSum / list.length));
 }
 
 function secToText(seconds) {
-    // const min = Math.floor(seconds / 60);
     const min = ~~(seconds / 60);
     const sec = seconds % 60;
     return `${min.pad(2)} : ${sec.pad(2)}`;
@@ -171,5 +177,7 @@ function btnTestFunc() {
     // logContainer.insertAdjacentHTML("afterbegin", "<div>test 1</div>");
     // logContainer.insertAdjacentHTML("afterbegin", "<div>test 2</div>");
     // logContainer.insertAdjacentHTML("afterbegin", "<div>test 3</div>");
-    logContainer.innerHTML = '<div class="log2">00 : 06</div><div class="log1">00 : 03</div><div class="log2">00 : 05</div><div class="log1">00 : 04</div>'
+    logContainer.innerHTML = '<div class="log2">00 : 10</div><div class="log1">00 : 12</div><div class="log2">00 : 04</div><div class="log1">00 : 04</div>'
+    avgSide1.textContent = getAvertage(".log1");
+    avgSide2.textContent = getAvertage(".log2");
 }

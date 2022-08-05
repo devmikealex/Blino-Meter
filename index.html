@@ -1,30 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blino-Meter</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <h1>Blino-Meter</h1>
-    <div class="container">
-        <div id="currentSide">*</div>
-        <button class="gradient" id="btn-main">&#x2708; START</button>
-        <div id="average"><div id="avgSide1">00 : 00</div><div id="avgSide2">00 : 00</div></div>
-        <div class="temp">
-            <button class="gradient" id="btn-inc">+10 sec</button>
-            <button class="gradient" id="btn-dec">-10 sec</button>
+    <div id="intro">
+        <h1><img src="frying-pan.png" alt="icon" width="60" height="60">&nbsp;Blino-Meter</h1>
+        <div class="container">
+            <div id="currentSide">*</div>
+            <button class="gradient" id="btn-main">&#x2708; START</button>
+            <div class="flexRow">
+                <div id="avgSide1">00 : 00</div>
+                <div id="avgSide2">00 : 00</div>
+            </div>
+            <div class="flexRow">
+                <button class="gradient" id="btn-inc">+10 sec</button>
+                <button class="gradient" id="btn-dec">-10 sec</button>
+            </div>
+            <div class="flexRow">
+                <button class="gradient" id="btn-undo">&#x2702; Last</button>
+                <button class="gradient" id="btn-delete-first">&#x2702; First</button>
+            </div>
+            <div id="logContainer"></div>
+            <div class="baseColor2">History</div>
+            <button class="btnTest" id="btn-test">TEST</button>
         </div>
-        <div class="temp">
-            <button class="gradient" id="btn-undo">&#x2702; Last</button>
-            <button class="gradient" id="btn-delete-first">&#x2702; First</button>
+        <div class="footer">
+            <div id="blinCount">Press START</div>
         </div>
-        <!-- <div id="blinCount">Total: 0</div> -->
-        <div id="logContainer"></div>
-        <button id="btn-test">TEST</button>
     </div>
-    <div id="blinCount">Total: 0</div>
+    <script>
+        window.addEventListener('resize', appHeight);
+        appHeight();
+        function appHeight() {
+            const el = document.getElementsByClassName('container');
+            el[0].style.height = `calc(${window.visualViewport.height}px - 6rem)`
+        }
+    </script>
     <script src="index.js"></script>
 </body>
+
 </html>

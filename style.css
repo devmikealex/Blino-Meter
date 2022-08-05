@@ -16,62 +16,45 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* text-align: center; */
-    margin: 0;
-    padding: 15px;
+    /* padding: 15px; */
     color:white;
-    height: 10vh;
-    /* background-color:rgb(99, 41, 0) */
+    height: 4rem;
     background: linear-gradient(rgb(255, 92, 52) 0%, rgb(252,10,79) 100%);
     border-radius: 0 0 20px 20px;
 }
-#blinCount {
+.footer {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 0;
     color:white;
-    height: 4vh;
+    height: 2rem;
     background: linear-gradient(to top, rgb(255, 92, 52) 0%, rgb(252,10,79) 100%);
     border-radius: 20px 20px 0 0;
 }
-
-
-#btn-main {
-    /* background-color: #1652f0; */
-    /* background-color: #cf0e0e; */
-    border: none;
-    border-radius: 20px;
-    color: #ffffff;
-    padding: 12px 12px;
-    font-size: 24px;
-    width: 200px;
-    margin: 6px 6px;
-}
-
-.gradient {
-    background: linear-gradient(to right, rgb(255, 92, 52) 0%, rgb(252,10,79) 100%);
-}
-
-
-
-button:hover{
-    cursor: pointer;
-}
-
-
 .container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 86vh;
-    /* background-color: #F6F5FA; */
+    /* height: calc(100vh - 6rem); */
+}
+#btn-main {
+    border: none;
+    border-radius: 20px;
+    color: #ffffff;
+    padding: 12px;
+    font-size: 24px;
+    width: 200px;
+    height: 60px;
+    margin: 6px;
+}
+button:hover{
+    cursor: pointer;
 }
 #logContainer {
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
     height: 200px;
     width: 200px;
@@ -87,46 +70,46 @@ button:hover{
 .log2 {
     color: var(--COLOR2);
 }
-
-#currentSide {
-    font-size: 20px;
-}
-
-#average {
-    font-size: 24px;
+.flexRow {
     display: flex;
     flex-direction: row;
 }
-.temp {
-    display: flex;
-    flex-direction: row;
-}
-
 #avgSide1, #avgSide2 {
-    margin: 6px 6px;
-    padding: 10px 10px;
+    font-size: 24px;
+    margin: 6px;
+    padding: 10px;
     border: 4px solid;
     border-radius: 20px;
     width: 130px;
     text-align: center;
+    background-color: white;
 }
-
-
-div.temp button, #btn-delete-first {
-    /* background-color: rgb(150, 67, 7); */
-    
+div.flexRow button, #btn-delete-first {
     border: none;
     border-radius: 20px;
     color: #ffffff;
-    padding: 10px 10px;
-    margin: 6px 6px;
+    padding: 10px;
+    margin: 6px;
     font-size: 20px;
     width: 130px;
 }
-
-div.temp button:hover {
-    background-color: rgb(123, 53, 3);
+div.flexRow button:active {
+    background: rgb(255, 92, 52);
 }
-div.temp button:active {
-    background-color: #160000;
+.gradient {
+    background: linear-gradient(to right, rgb(255, 92, 52) 0%, rgb(252,10,79) 100%);
+}
+.gradient:hover {
+    background: rgb(252,10,79);
+}
+.baseColor2 {
+    color: rgb(252,10,79);
+}
+.btnTest{
+    border: none;
+    border-radius: 20px;
+    color: #ffffff;
+    padding: 8px;
+    width: 100px;
+    margin: 6px;   
 }

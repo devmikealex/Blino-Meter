@@ -3,3 +3,4 @@ code comments clean
 design
 add images
 code refactoring
+diff sound alert for avg and last
