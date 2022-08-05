@@ -1,0 +1,5 @@
+css rework
+code comments clean
+design
+add images
+code refactoring

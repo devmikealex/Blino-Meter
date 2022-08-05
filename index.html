@@ -10,18 +10,21 @@
     <h1>Blino-Meter</h1>
     <div class="container">
         <div id="currentSide">*</div>
-        <button id="btn-main">START</button>
-        <div class="temp">
-            <button id="btn-inc">+10 sec</button>
-            <button id="btn-dec">-10 sec</button>
-            <button id="btn-undo">Undo last</button>
-        </div>
+        <button class="gradient" id="btn-main">&#x2708; START</button>
         <div id="average"><div id="avgSide1">00 : 00</div><div id="avgSide2">00 : 00</div></div>
+        <div class="temp">
+            <button class="gradient" id="btn-inc">+10 sec</button>
+            <button class="gradient" id="btn-dec">-10 sec</button>
+        </div>
+        <div class="temp">
+            <button class="gradient" id="btn-undo">&#x2702; Last</button>
+            <button class="gradient" id="btn-delete-first">&#x2702; First</button>
+        </div>
+        <!-- <div id="blinCount">Total: 0</div> -->
         <div id="logContainer"></div>
-        <button id="btn-delete-first">Remove first</button>
-        <div id="blinCount">Total: 0</div>
         <button id="btn-test">TEST</button>
     </div>
+    <div id="blinCount">Total: 0</div>
     <script src="index.js"></script>
 </body>
 </html>

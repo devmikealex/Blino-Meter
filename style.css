@@ -2,43 +2,82 @@
     --COLOR1: #CCC;
     --COLOR2: #CCC;
 }
-body {
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+body {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
+    background-color: #F6F5FA;
 }
-button:hover{
-    cursor: pointer;
+h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* text-align: center; */
+    margin: 0;
+    padding: 15px;
+    color:white;
+    height: 10vh;
+    /* background-color:rgb(99, 41, 0) */
+    background: linear-gradient(rgb(255, 92, 52) 0%, rgb(252,10,79) 100%);
+    border-radius: 0 0 20px 20px;
 }
+#blinCount {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    color:white;
+    height: 4vh;
+    background: linear-gradient(to top, rgb(255, 92, 52) 0%, rgb(252,10,79) 100%);
+    border-radius: 20px 20px 0 0;
+}
+
+
 #btn-main {
     /* background-color: #1652f0; */
     /* background-color: #cf0e0e; */
     border: none;
-    border-radius: 8px;
+    border-radius: 20px;
     color: #ffffff;
-    padding: 12px 32px;
+    padding: 12px 12px;
     font-size: 24px;
+    width: 200px;
+    margin: 6px 6px;
 }
+
+.gradient {
+    background: linear-gradient(to right, rgb(255, 92, 52) 0%, rgb(252,10,79) 100%);
+}
+
+
+
+button:hover{
+    cursor: pointer;
+}
+
 
 .container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: #dae2f8;
+    height: 86vh;
+    /* background-color: #F6F5FA; */
 }
 #logContainer {
     display: flex;
     flex-direction: column;
     /* justify-content: center; */
     align-items: center;
-    height: 400px;
+    height: 200px;
     width: 200px;
     background-color: white;
-    margin: 10px;
-    border-radius: 8px;
+    margin: 6px;
+    border-radius: 20px;
     font-size: 20px;
     overflow: auto;
 }
@@ -48,13 +87,7 @@ button:hover{
 .log2 {
     color: var(--COLOR2);
 }
-h1 {
-    text-align: center;
-    margin: 0;
-    padding: 10px;
-    color:rgb(252, 217, 136);
-    background-color:rgb(99, 41, 0)
-}
+
 #currentSide {
     font-size: 20px;
 }
@@ -70,21 +103,25 @@ h1 {
 }
 
 #avgSide1, #avgSide2 {
-    margin: 10px 10px;
-    padding: 5px 30px;
-    border: 2px solid;
-    border-radius: 8px;
+    margin: 6px 6px;
+    padding: 10px 10px;
+    border: 4px solid;
+    border-radius: 20px;
+    width: 130px;
+    text-align: center;
 }
 
 
 div.temp button, #btn-delete-first {
-    background-color: rgb(150, 67, 7);
+    /* background-color: rgb(150, 67, 7); */
+    
     border: none;
-    border-radius: 8px;
+    border-radius: 20px;
     color: #ffffff;
-    padding: 8px 20px;
-    margin: 10px 6px;
+    padding: 10px 10px;
+    margin: 6px 6px;
     font-size: 20px;
+    width: 130px;
 }
 
 div.temp button:hover {

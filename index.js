@@ -1,8 +1,8 @@
 const COLOR1 = "#1652f0";
-const COLOR2 = "#cf0e0e";
+const COLOR2 = "rgb(252,10,79)";
 
-const sound1 = new Audio("Beep_Computer_04.mp3");
-sound1.preload = "auto";
+const alertSound = new Audio("Beep_Computer_04.mp3");
+alertSound.preload = "auto";
 
 document.documentElement.style.setProperty("--COLOR1", COLOR1);
 document.documentElement.style.setProperty("--COLOR2", COLOR2);
@@ -42,10 +42,9 @@ let signalDelay;
 
 function btnMainFunc() {
     console.log(btnMain.textContent);
-    // TODO упростить условие
-    // if (btnMain.textContent === "START" || btnMain.textContent === "PAUSE") {
     if (!btnMain.textContent.includes(":")) {
         btnMain.textContent = "00 : 00";
+        btnMain.classList.remove('gradient')
         startTime = new Date();
         signalDelay = 0;
         timerId = setInterval(timer, 1000);
@@ -93,7 +92,7 @@ function timer() {
     // if (avgSec && sec >= avgSec && !(sec%5)) {
     if (avgSec && sec >= avgSec) {
         if (!(signalDelay % 5)) {
-            Signal("test");
+            Signal(alertSound);
         }
         signalDelay++;
     }
@@ -158,18 +157,19 @@ function btnIncFunc(e) {
     avgSide2.textContent = getAvertage(".log2");
 }
 
-function Signal(mode) {
-    let audio;
-    switch (mode) {
-        case "test":
-            audio = sound1;
-            break;
-    }
+function Signal(audio) {
+    // let audio;
+    // switch (mode) {
+    //     case "test":
+    //         audio = sound1;
+    //         break;
+    // }
     audio.play();
 }
 
 function btnTestFunc() {
-    logContainer.insertAdjacentHTML("afterbegin", "<div>test 1</div>");
-    logContainer.insertAdjacentHTML("afterbegin", "<div>test 2</div>");
-    logContainer.insertAdjacentHTML("afterbegin", "<div>test 3</div>");
+    // logContainer.insertAdjacentHTML("afterbegin", "<div>test 1</div>");
+    // logContainer.insertAdjacentHTML("afterbegin", "<div>test 2</div>");
+    // logContainer.insertAdjacentHTML("afterbegin", "<div>test 3</div>");
+    logContainer.innerHTML = '<div class="log2">00 : 06</div><div class="log1">00 : 03</div><div class="log2">00 : 05</div><div class="log1">00 : 04</div>'
 }
