@@ -21,7 +21,9 @@ avgSide1.style.color = COLOR1;
 const avgSide2 = document.getElementById("avgSide2");
 avgSide2.style.color = COLOR2;
 
-const btnTest = document.getElementById("btn-test");
+// const btnTest = document.getElementById("btn-test");
+// btnTest.addEventListener("click", btnTestFunc);
+const btnTest = document.getElementsByClassName("footer")[0];
 btnTest.addEventListener("click", btnTestFunc);
 
 const logContainer = document.getElementById("logContainer");
@@ -40,21 +42,21 @@ let startTime;
 let timerId;
 let totalBlinCount = 0;
 let signalDelay;
-let firstRun=true
+let firstRun = true;
 let lastSecAlert;
 
 function btnMainFunc() {
     if (!btnMain.textContent.includes(":")) {
-        if(firstRun){
-            firstRun=false
-            btnMain.classList.remove('gradient')
+        if (firstRun) {
+            firstRun = false;
+            btnMain.classList.remove("gradient");
             // blinCount.textContent = "-"
             btnMain.style.backgroundColor = COLOR1;
         }
         btnMain.textContent = "00 : 00";
         startTime = new Date();
         signalDelay = 0;
-        lastSecAlert = true
+        lastSecAlert = true;
         timerId = setInterval(timer, 1000);
     } else {
         clearInterval(timerId);
@@ -85,14 +87,14 @@ function timer() {
     const newTime = new Date();
     const sec = Math.floor((newTime.getTime() - startTime.getTime()) / 1000);
     btnMain.textContent = secToText(sec);
-    let avgSec
-    let secondLastSec
+    let avgSec;
+    let secondLastSec;
     if (currentSide.textContent === "Side 1") {
         avgSec = textToSec(avgSide1.textContent);
-        secondLastSec = logContainer.getElementsByClassName('log1')[0]
+        secondLastSec = logContainer.getElementsByClassName("log1")[0];
     } else {
         avgSec = textToSec(avgSide2.textContent);
-        secondLastSec = logContainer.getElementsByClassName('log2')[0]
+        secondLastSec = logContainer.getElementsByClassName("log2")[0];
     }
     if (avgSec && sec >= avgSec) {
         if (!(signalDelay % 5)) {
@@ -100,12 +102,12 @@ function timer() {
         }
         signalDelay++;
     }
-    
-    const lastSec = +textToSec(secondLastSec.textContent) 
+
+    const lastSec = +textToSec(secondLastSec.textContent);
     if (lastSecAlert && lastSec && sec >= lastSec) {
         Signal(lastSound);
-        lastSecAlert = false
-    }  
+        lastSecAlert = false;
+    }
 }
 
 function log(time, logColor) {
@@ -177,7 +179,8 @@ function btnTestFunc() {
     // logContainer.insertAdjacentHTML("afterbegin", "<div>test 1</div>");
     // logContainer.insertAdjacentHTML("afterbegin", "<div>test 2</div>");
     // logContainer.insertAdjacentHTML("afterbegin", "<div>test 3</div>");
-    logContainer.innerHTML = '<div class="log2">00 : 10</div><div class="log1">00 : 12</div><div class="log2">00 : 04</div><div class="log1">00 : 04</div>'
+    logContainer.innerHTML =
+        '<div class="log2">00 : 10</div><div class="log1">00 : 12</div><div class="log2">00 : 04</div><div class="log1">00 : 04</div>';
     avgSide1.textContent = getAvertage(".log1");
     avgSide2.textContent = getAvertage(".log2");
 }

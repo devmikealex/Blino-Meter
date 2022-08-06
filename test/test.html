@@ -5,13 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blino-Meter</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css.css">
 </head>
 
 <body>
-    <h1><img src="icon.png" alt="icon" width="55" height="55">&nbsp;Blino-Meter</h1>
+    <h1>Blino-Meter</h1>
     <div class="container">
-        <div id="currentSide">*</div>
         <button class="gradient" id="btn-main">&#x2708; START</button>
         <div class="flexRow">
             <div id="avgSide1">00 : 00</div>
@@ -26,22 +25,9 @@
             <button class="gradient" id="btn-delete-first">&#x2702; First</button>
         </div>
         <div id="logContainer"></div>
-        <!-- <div class="baseColor2">History</div> -->
-        <!-- <button class="btnTest" id="btn-test">TEST</button> -->
     </div>
     <div class="footer">
         <div id="blinCount">Press START</div>
     </div>
-    <script>
-        window.addEventListener('resize', appHeight);
-        appHeight();
-
-        function appHeight() {
-            const el = document.getElementsByClassName('container');
-            el[0].style.height = `calc(${window.visualViewport.height}px - 6rem)`
-        }
-    </script>
-    <script src="index.js"></script>
 </body>
-
 </html>
