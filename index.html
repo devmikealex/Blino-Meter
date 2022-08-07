@@ -11,7 +11,7 @@
 <body>
     <h1><img src="icon.png" alt="icon" width="55" height="55">&nbsp;Blino-Meter</h1>
     <div class="container">
-        <div id="currentSide">*</div>
+        <div id="currentSide">&nbsp;</div>
         <button class="gradient" id="btn-main">&#x2708; START</button>
         <div class="flexRow">
             <div id="avgSide1">00 : 00</div>
@@ -30,18 +30,22 @@
         <!-- <button class="btnTest" id="btn-test">TEST</button> -->
     </div>
     <div class="footer">
-        <div id="blinCount">Press START</div>
+        <span id="blinCount">Press START</span>
+        <span id="totalTime"></span>
     </div>
+    <script src="index.js"></script>
     <script>
         window.addEventListener('resize', appHeight);
         appHeight();
-
         function appHeight() {
-            const el = document.getElementsByClassName('container');
-            el[0].style.height = `calc(${window.visualViewport.height}px - 6rem)`
+            const y = window.visualViewport.height
+            let x = window.visualViewport.width
+            x = x > 600 ? 500 : x
+            const cont = document.getElementsByClassName('container');
+            cont[0].style.height = `calc(${y}px - 6rem)`
+            cont[0].style.width = `${x}px`
         }
     </script>
-    <script src="index.js"></script>
 </body>
 
 </html>

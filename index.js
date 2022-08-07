@@ -1,9 +1,11 @@
 const COLOR1 = "#1652f0";
 const COLOR2 = "rgb(252,10,79)";
 
-const avgSound = new Audio("Beep_Computer_04.mp3");
+const minuteSound = new Audio("1.mp3");
+const beforeAvgSound = new Audio("2.mp3");
+const avgSound = new Audio("3.mp3");
 // alertSound.preload = "auto";
-const lastSound = new Audio("001.wav");
+const lastSound = new Audio("4.mp3");
 
 document.documentElement.style.setProperty("--COLOR1", COLOR1);
 document.documentElement.style.setProperty("--COLOR2", COLOR2);
@@ -13,7 +15,7 @@ btnMain.addEventListener("click", btnMainFunc);
 // btnMain.style.backgroundColor = COLOR1;
 
 const currentSide = document.getElementById("currentSide");
-currentSide.textContent = "Side 1";
+// currentSide.textContent = "Side 1";
 currentSide.style.color = COLOR1;
 
 const avgSide1 = document.getElementById("avgSide1");
@@ -28,6 +30,7 @@ btnTest.addEventListener("click", btnTestFunc);
 
 const logContainer = document.getElementById("logContainer");
 const blinCount = document.getElementById("blinCount");
+const totalTimeOut = document.getElementById("totalTime");
 
 const btnInc = document.getElementById("btn-inc");
 btnInc.addEventListener("click", btnIncFunc);
@@ -39,24 +42,29 @@ const btnDeleteFirst = document.getElementById("btn-delete-first");
 btnDeleteFirst.addEventListener("click", btnIncFunc);
 
 let startTime;
+let totalTime;
 let timerId;
 let totalBlinCount = 0;
 let signalDelay;
 let firstRun = true;
 let lastSecAlert;
+let beforeAvgSecAlert;
 
 function btnMainFunc() {
     if (!btnMain.textContent.includes(":")) {
         if (firstRun) {
             firstRun = false;
             btnMain.classList.remove("gradient");
-            // blinCount.textContent = "-"
+            blinCount.textContent = ""
             btnMain.style.backgroundColor = COLOR1;
+            currentSide.textContent = "Side 1";
+            totalTime = new Date();
         }
         btnMain.textContent = "00 : 00";
         startTime = new Date();
         signalDelay = 0;
         lastSecAlert = true;
+        beforeAvgSecAlert = true;
         timerId = setInterval(timer, 1000);
     } else {
         clearInterval(timerId);
@@ -69,7 +77,7 @@ function btnMainFunc() {
             currentSide.style.color = COLOR2;
             avgTarget = avgSide1;
             ++totalBlinCount;
-            blinCount.textContent = "Total: " + totalBlinCount;
+            blinCount.textContent = `Total: ${totalBlinCount}`;
         } else {
             logColor = "log2";
             currentSide.textContent = "Side 1";
@@ -87,6 +95,9 @@ function timer() {
     const newTime = new Date();
     const sec = Math.floor((newTime.getTime() - startTime.getTime()) / 1000);
     btnMain.textContent = secToText(sec);
+    const totalSec = Math.trunc((newTime.getTime() - totalTime.getTime()) / 1000);
+    totalTimeOut.textContent = `${secToText(totalSec)}`
+
     let avgSec;
     let secondLastSec;
     if (currentSide.textContent === "Side 1") {
@@ -96,17 +107,38 @@ function timer() {
         avgSec = textToSec(avgSide2.textContent);
         secondLastSec = logContainer.getElementsByClassName("log2")[0];
     }
-    if (avgSec && sec >= avgSec) {
-        if (!(signalDelay % 5)) {
-            Signal(avgSound);
-        }
-        signalDelay++;
-    }
 
-    const lastSec = +textToSec(secondLastSec.textContent);
-    if (lastSecAlert && lastSec && sec >= lastSec) {
-        Signal(lastSound);
-        lastSecAlert = false;
+    if (secondLastSec) {
+        if (!(sec % 60)) {
+            // beep every minute
+            Signal(minuteSound);
+            return
+        }
+
+        if (avgSec && sec >= avgSec) {
+            // beep every 5 seconds after average
+            if (!(signalDelay % 5)) {
+                Signal(avgSound);
+                signalDelay++;
+                return
+            }
+            signalDelay++;
+        }
+
+        if (beforeAvgSecAlert && avgSec > 15 && sec >= avgSec - 15) {
+            // signal 15 seconds before the average
+            Signal(beforeAvgSound);
+            beforeAvgSecAlert = false;
+            return
+        }
+
+        const lastSec = +textToSec(secondLastSec.textContent);
+        if (lastSecAlert && lastSec && sec >= lastSec) {
+            // signal once the last time exceeded
+            Signal(lastSound);
+            lastSecAlert = false;
+            return
+        }
     }
 }
 
@@ -179,8 +211,7 @@ function btnTestFunc() {
     // logContainer.insertAdjacentHTML("afterbegin", "<div>test 1</div>");
     // logContainer.insertAdjacentHTML("afterbegin", "<div>test 2</div>");
     // logContainer.insertAdjacentHTML("afterbegin", "<div>test 3</div>");
-    logContainer.innerHTML =
-        '<div class="log2">00 : 10</div><div class="log1">00 : 12</div><div class="log2">00 : 04</div><div class="log1">00 : 04</div>';
+    logContainer.innerHTML = '<div class="log2">00 : 10</div><div class="log1">00 : 12</div><div class="log2">00 : 04</div><div class="log1">00 : 04</div>';
     avgSide1.textContent = getAvertage(".log1");
     avgSide2.textContent = getAvertage(".log2");
 }
