@@ -1,5 +1,3 @@
-import css from "./../style.css";
-
 import { secToText, textToSec, getAvertage } from "./timeConvert.js";
 
 const COLOR1 = "#1652f0";
