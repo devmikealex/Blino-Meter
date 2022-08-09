@@ -1,3 +1,7 @@
+import css from "./../style.css";
+
+import { secToText, textToSec, getAvertage } from "./timeConvert.js";
+
 const COLOR1 = "#1652f0";
 const COLOR2 = "rgb(252,10,79)";
 
@@ -55,7 +59,7 @@ function btnMainFunc() {
         if (firstRun) {
             firstRun = false;
             btnMain.classList.remove("gradient");
-            blinCount.textContent = ""
+            blinCount.textContent = "";
             btnMain.style.backgroundColor = COLOR1;
             currentSide.textContent = "Side 1";
             totalTime = new Date();
@@ -96,7 +100,7 @@ function timer() {
     const sec = Math.floor((newTime.getTime() - startTime.getTime()) / 1000);
     btnMain.textContent = secToText(sec);
     const totalSec = Math.trunc((newTime.getTime() - totalTime.getTime()) / 1000);
-    totalTimeOut.textContent = `${secToText(totalSec)}`
+    totalTimeOut.textContent = `${secToText(totalSec)}`;
 
     let avgSec;
     let secondLastSec;
@@ -112,7 +116,7 @@ function timer() {
         if (!(sec % 60)) {
             // beep every minute
             Signal(minuteSound);
-            return
+            return;
         }
 
         if (avgSec && sec >= avgSec) {
@@ -120,7 +124,7 @@ function timer() {
             if (!(signalDelay % 5)) {
                 Signal(avgSound);
                 signalDelay++;
-                return
+                return;
             }
             signalDelay++;
         }
@@ -129,7 +133,7 @@ function timer() {
             // signal 15 seconds before the average
             Signal(beforeAvgSound);
             beforeAvgSecAlert = false;
-            return
+            return;
         }
 
         const lastSec = +textToSec(secondLastSec.textContent);
@@ -137,7 +141,7 @@ function timer() {
             // signal once the last time exceeded
             Signal(lastSound);
             lastSecAlert = false;
-            return
+            return;
         }
     }
 }
@@ -154,28 +158,17 @@ Number.prototype.pad = function (digits) {
     return n;
 };
 
-function getAvertage(className) {
-    const list = document.querySelectorAll(className);
-    if (!list.length) {
-        return "00 : 00";
-    }
-    let allTimeSum = 0;
-    list.forEach((el) => {
-        allTimeSum += textToSec(el.textContent);
-    });
-    return secToText(Math.trunc(allTimeSum / list.length));
-}
-
-function secToText(seconds) {
-    const min = ~~(seconds / 60);
-    const sec = seconds % 60;
-    return `${min.pad(2)} : ${sec.pad(2)}`;
-}
-
-function textToSec(text) {
-    const time = text.split(" : ");
-    return time[0] * 60 + Number(time[1]);
-}
+// function getAvertage(className) {
+//     const list = document.querySelectorAll(className);
+//     if (!list.length) {
+//         return "00 : 00";
+//     }
+//     let allTimeSum = 0;
+//     list.forEach((el) => {
+//         allTimeSum += textToSec(el.textContent);
+//     });
+//     return secToText(Math.trunc(allTimeSum / list.length));
+// }
 
 function btnIncFunc(e) {
     const first = logContainer.firstChild;
