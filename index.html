@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blino-Meter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1><img src="icon.png" alt="icon" width="55" height="55">&nbsp;Blino-Meter</h1>
+    <div class="container">
+        <div id="currentSide">&nbsp;</div>
+        <button class="gradient" id="btn-main">&#x2708; START</button>
+        <div class="flexRow">
+            <div id="avgSide1">00 : 00</div>
+            <div id="avgSide2">00 : 00</div>
+        </div>
+        <div class="flexRow">
+            <button class="gradient" id="btn-inc">+10 sec</button>
+            <button class="gradient" id="btn-dec">-10 sec</button>
+        </div>
+        <div class="flexRow">
+            <button class="gradient" id="btn-undo">&#x2702; Last</button>
+            <button class="gradient" id="btn-delete-first">&#x2702; First</button>
+        </div>
+        <div id="logContainer"></div>
+        <!-- <div class="baseColor2">History</div> -->
+        <!-- <button class="btnTest" id="btn-test">TEST</button> -->
+    </div>
+    <div class="footer">
+        <span id="blinCount">Press START</span>
+        <span id="totalTime"></span>
+    </div>
+    <script src="main.js"></script>
+    <script>
+        window.addEventListener('resize', appHeight);
+        appHeight();
+        function appHeight() {
+            const y = window.visualViewport.height
+            let x = window.visualViewport.width
+            x = x > 600 ? 500 : x
+            const cont = document.getElementsByClassName('container');
+            cont[0].style.height = `calc(${y}px - 6rem)`
+            cont[0].style.width = `${x}px`
+        }
+    </script>
+</body>
+
+</html>
