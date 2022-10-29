@@ -2,3 +2,4 @@ css rework
 code comments clean
 add images
 code refactoring
+add bg pattern
