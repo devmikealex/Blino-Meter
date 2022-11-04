@@ -10,7 +10,8 @@
     "build": "webpack --mode=production",
     "dev": "webpack --mode=development --devtool=inline-source-map",
     "watch": "webpack --watch --mode=development --devtool=inline-source-map",
-    "devserv": "webpack serve --open --mode=development"
+    "devserv": "webpack serve --open --mode=development",
+    "deploy": "git subtree push --prefix dist origin gh-pages"
   },
   "keywords": [],
   "author": "",
